@@ -15,7 +15,7 @@ $ docker-compose exec app composer install
 ```
 # Copy .env of app
 ```
-$cd source
+$cd src
 
 $cp .env.example .env
 
