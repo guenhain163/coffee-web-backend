@@ -40,14 +40,17 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-        'api' => [
-            'driver' => 'token',
-            'provider' => 'users',
-            'hash' => false,
-        ],
         'admin' => [
             'driver' => 'session',
             'provider' => 'admins',
+        ],
+        'user' => [
+            'driver' => 'jwt',
+            'provider' => 'users'
+        ],
+        'company' => [
+            'driver' => 'jwt',
+            'provider' => 'companies'
         ],
     ],
 
@@ -69,19 +72,19 @@ return [
     */
 
     'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\User::class,
-        ],
-
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
-        
+
         'admins' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Admin::class, 
+            'model' => App\Models\Admin::class,
+        ],
+
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Customer::class,
         ],
     ],
 
@@ -107,6 +110,12 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+        'companies' => [
+            'provider' => 'companies',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
     ],
 
     /*
@@ -122,4 +131,7 @@ return [
 
     'password_timeout' => 10800,
 
+    'socialite' => [
+        'drivers' => ['facebook',],
+    ],
 ];

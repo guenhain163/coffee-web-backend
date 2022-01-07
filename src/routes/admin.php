@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\ProductController;
 
 
 Route::namespace('Admin')->group(function () {
@@ -9,7 +10,11 @@ Route::namespace('Admin')->group(function () {
     Route::get('logout', 'Auth\LoginController@logout')->name('admin.logout');
     Route::group(['middleware' => ['auth:admin']], function () {
         Route::get('/', 'AdminController@index')->name('admin.index');
+        Route::prefix('products')->group(function () {
+            Route::get('/', 'ProductController@index')->name('admin.product.index');
+            Route::get('/show', [ProductController::class, 'show'])->name('admin.product.show');
+        });
     });
-    
-    
+
+
 });
