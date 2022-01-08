@@ -10,3 +10,4 @@
 <link rel="stylesheet" href="/admin-lte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
 <!-- Theme style -->
 <link rel="stylesheet" href="/admin-lte/dist/css/adminlte.min.css">
+<link rel="stylesheet" href="/css/login.css">
