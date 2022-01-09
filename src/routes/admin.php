@@ -11,8 +11,8 @@ Route::namespace('Admin')->group(function () {
     Route::group(['middleware' => ['auth:admin']], function () {
         Route::get('/', 'AdminController@index')->name('admin.index');
         Route::prefix('products')->group(function () {
-            Route::get('/', 'ProductController@index')->name('admin.product.index');
-            Route::get('/show', [ProductController::class, 'show'])->name('admin.product.show');
+            Route::get('/', 'ProductController@index')->name('admin.products.index');
+            Route::get('/show', [ProductController::class, 'show'])->name('admin.products.show');
         });
     });
 

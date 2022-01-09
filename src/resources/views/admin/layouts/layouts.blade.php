@@ -10,7 +10,7 @@
   <!-- Main Sidebar Container -->
   @include('admin.elements.sidebar')
   <div class="content-wrapper">
-    
+
     <section class="content">
       <div class="container-fluid">
         <div class="row">
@@ -24,8 +24,7 @@
 </div>
 @include('admin.elements.footer')
 @yield('modal')
-@yield('script')
 @include('admin.elements.scripts')
-
+@yield('script')
 </body>
 </html>
