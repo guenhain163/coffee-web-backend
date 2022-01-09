@@ -17,7 +17,6 @@ class ProductService extends BaseService
 
     public function getProductList()
     {
-//        return Product::all();
         return $this->productRepository->getProductList();
     }
 }

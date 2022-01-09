@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Services\Admin\ProductService;
+use Yajra\DataTables\DataTables;
 
 class ProductController extends Controller
 {
@@ -19,8 +20,8 @@ class ProductController extends Controller
         return view('admin.product.index');
     }
 
-    public function show()
+    public function show(DataTables $dataTables)
     {
-        return $this->productService->getProductList();
+        return $dataTables->eloquent($this->productService->getProductList())->toJson();
     }
 }
