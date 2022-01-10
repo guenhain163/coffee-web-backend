@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="/admin-lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="/admin-lte/dist/css/adminlte.min.css">
-  <link rel="stylesheet" href="/css/login.css">
+  <link rel="stylesheet" href="/assets/css/login.css">
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
