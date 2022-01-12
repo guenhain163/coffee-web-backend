@@ -4,19 +4,20 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UserContactRequest;
-use App\Repositories\UserContactRepository;
-use App\Http\Resources\UserContactResource;
 use Illuminate\Support\Facades\DB;
-use App\Models\UserContact;
+use App\Http\Resources\ProductResource;
+use App\Http\Resources\ProductCollection;
+use App\Http\Requests\ProductRequest;
+use App\Repositories\ProductRepository;
 
-class UserContactController extends Controller
+
+class ProductController extends Controller
 {
-    protected $userContactRepository;
+    protected $productRepository;
 
-    public function __construct(UserContactRepository $userContactRepository)
+    public function __construct(ProductRepository $productRepository)
     {
-        $this->userContactRepository = $userContactRepository;
+        $this->productRepository = $productRepository;
     }
 
     /**
@@ -24,9 +25,9 @@ class UserContactController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        return responseOK(new ProductCollection($this->productRepository->getProductList($request)));
     }
 
     /**
@@ -45,18 +46,9 @@ class UserContactController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserContactRequest $request)
+    public function store(Request $request)
     {
-        Db::beginTransaction();
-        try {
-            $data = $request->only(['name', 'email', 'phone', 'feedback', 'option']);
-            $userContact = $this->userContactRepository->create($data);
-            DB::commit();
-            return responseCreated(new UserContactResource($userContact));
-        } catch(\Exception $exception) {
-            DB::roolback();
-            return responseError(500, $exception->getMessage());
-        }
+        //
     }
 
     /**
@@ -67,7 +59,9 @@ class UserContactController extends Controller
      */
     public function show($id)
     {
-        //
+        $product = $this->productRepository->findOrFail($id);
+        $getProducts = $this->productRepository->getProductByCategory($product->category_id);
+        return responseOK(new ProductCollection($getProducts));
     }
 
     /**
@@ -102,5 +96,11 @@ class UserContactController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function favoriteShow(Request $request)
+    {
+        $listFavorite = $this->productRepository->getFavoriteProduct($request);
+        return responseOK(new ProductCollection($listFavorite));
     }
 }
