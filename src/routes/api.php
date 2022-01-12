@@ -19,4 +19,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
  
-Route::post('/contact', 'Api\UserContactController@store');
+Route::post('/contact', 'Api\ProductController@index');
+
+// Product Controller
+Route::prefix('/product')->group(function() {
+    Route::get('/', 'Api\ProductController@index');
+    Route::get('/favorite', 'Api\ProductController@favoriteShow');
+    Route::get('/{id}', 'Api\ProductController@show');
+});
