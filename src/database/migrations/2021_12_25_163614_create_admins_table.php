@@ -15,9 +15,13 @@ class CreateAdminsTable extends Migration
     {
         Schema::create('admins', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('email')->unique();
+            $table->string('name', 50)->nullable();
+            $table->string('email', 100)->unique();
             $table->string('password');
-            $table->timestamps();
+            $table->tinyInteger('status')->default(1)->comment("1: Active. 0: Blocked");
+            $table->tinyInteger('role')->default(2)->comment("1-SuperAdmin 2-NormalAdmin");
+            $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });
     }
 
