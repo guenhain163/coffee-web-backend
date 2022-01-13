@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->unsignedBigInteger('category_id');
             $table->string('link_image');
             $table->longText('description');
-            $table->integer('price')->default(0);
+            $table->decimal('price', 5, 2)->default(0);
             $table->tinyInteger('status')->default(1)->comment('0: Block , 1: Active');
             $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
