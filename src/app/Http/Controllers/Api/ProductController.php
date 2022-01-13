@@ -64,6 +64,12 @@ class ProductController extends Controller
         return responseOK(new ProductCollection($getProducts));
     }
 
+    public function showWithCategory($id)
+    {
+        $product = $this->productRepository->getProductByCategory($id);
+        return responseOK((new ProductCollection($product)));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
