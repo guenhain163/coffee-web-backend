@@ -26,5 +26,5 @@ Route::prefix('/product')->group(function() {
     Route::get('/', 'Api\ProductController@index');
     Route::get('/favorite', 'Api\ProductController@favoriteShow');
     Route::get('/{id}', 'Api\ProductController@show');
-    Route::get('/{id}', 'Api\ProductController@showWithCategory');
+    Route::get('/category/{id}', 'Api\ProductController@showWithCategory');
 });
