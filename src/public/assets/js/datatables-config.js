@@ -31,7 +31,7 @@ $.extend($.fn.dataTable.defaults, {
         loadingRecords: `読み込み中...`,
         infoFiltered: "",
         processing: `
-                <div class="spinner-border text-secondary" role="status">
+                <div class="spinner-border" role="status">
                   <span class="sr-only">読み込み中...</span>
                 </div>
               `,

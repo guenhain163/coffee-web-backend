@@ -17,7 +17,7 @@ class CreateProductsTable extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->unsignedBigInteger('category_id');
-            $table->string('link_image');
+            $table->string('link_image')->nullable();
             $table->longText('description');
             $table->integer('price')->default(0);
             $table->tinyInteger('status')->default(1)->comment('0: Block , 1: Active');

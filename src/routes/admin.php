@@ -13,6 +13,7 @@ Route::namespace('Admin')->group(function () {
         Route::prefix('products')->group(function () {
             Route::get('/', 'ProductController@index')->name('admin.products.index');
             Route::get('/show', [ProductController::class, 'show'])->name('admin.products.show');
+            Route::post('/create', [ProductController::class, 'create'])->name('admin.products.create');
         });
     });
 

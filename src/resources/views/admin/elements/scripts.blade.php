@@ -11,3 +11,24 @@
 <script src="/admin-lte/plugins/datatables-fixedheader/js/dataTables.fixedHeader.min.js"></script>
 <script src="/admin-lte/plugins/datatables-responsive/js/dataTables.responsive.js"></script>
 <script src="/admin-lte/plugins/datatables-responsive/js/responsive.bootstrap4.js"></script>
+<!-- Jquery-number -->
+<script src="/admin-lte/plugins/jquery-number/js/jquery.number.min.js"></script>
+<!-- Toastr -->
+<script src="/admin-lte/plugins/toastr/toastr.min.js"></script>
+<!-- Validation -->
+<script src="/admin-lte/plugins/jquery-validation/jquery.validate.min.js"></script>
+<!-- Input mask -->
+<script src="/admin-lte/plugins/inputmask/jquery.inputmask.min.js"></script>
+<script>
+    @if($message = session('success'))
+    $(function () {
+        $(document).Toasts("create", {
+            class: "bg-success",
+            title: "失敗",
+            autohide: true,
+            delay: 2000,
+            body: '{{ $message }}',
+        });
+    });
+    @endif
+</script>

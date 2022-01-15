@@ -46,10 +46,26 @@ html, body {
 .box-table .table td {
     border-bottom: 1px solid #CBCBCB;
     vertical-align: middle;
+    text-align: center;
 }
 
 .box-table .dataTables_scrollHead {
     height: 48px;
+}
+
+.box-table .dataTables_processing {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background-color: transparent;
+    border: 0;
+    z-index: 1000;
+    transform: translate(-50%, -50%);
+    box-shadow: none;
+}
+
+.box-table .dataTables_processing .spinner-border {
+    color: #5D261B;
 }
 
 .box-table .bottom {
@@ -106,4 +122,30 @@ html, body {
     color: #5D261B;
     background-color: #EFC3A4;
     border: 1px solid #EFC3A4;
+}
+
+.btn-brown {
+    background-color: #5D261B!important;
+    color: #EFC3A4!important;
+}
+
+.no-resize {
+    resize: none!important;
+}
+
+.is-row-error:focus {
+    border: 1px solid #ef5f63;
+    box-shadow: 0 0 0 3px rgba(239, 95, 99, 20%);
+    outline: 0;
+}
+
+label.error {
+    background-color: #fff;
+    color: #ef5f63;
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 0.5rem 0.5rem 0 0.5rem;
+    width: 100%;
+    margin-bottom: 0;
 }
