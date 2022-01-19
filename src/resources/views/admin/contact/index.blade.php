@@ -82,6 +82,26 @@
 {{--            </div>--}}
 {{--        </div>--}}
 {{--    </div>--}}
+    <div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="modalDelete" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Xác nhận</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Bạn có chắc chắn với hành động của mình không?</p>
+                    <input id="_id" type="hidden" value="" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-cancel" data-dismiss="modal" aria-label="Close" aria-invalid="false">Hủy</button>
+                    <button type="button" class="btn btn-brown btn-confirm">Xóa</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="bg-loading d-none">
         <div class="spinner-border text-light" style="width: 3rem; height: 3rem;" role="status">
             <span class="sr-only">Loading...</span>
@@ -92,7 +112,7 @@
 @section('script')
     <script src="/assets/js/datatables-config.js"></script>
     <script type="text/javascript">
-        var table = $('#table-products').DataTable({
+        var table = $('#table-contacts').DataTable({
             bDestroy: false,
             columnDefs: [
                 {
@@ -101,7 +121,7 @@
                 }
             ],
             ajax: {
-{{--                url: "{!! route('admin.contacts.show') !!}",--}}
+                url: "{!! route('admin.contacts.show') !!}",
             },
             columns: [
                 {
@@ -110,6 +130,14 @@
                 },
                 {
                     data: 'name'
+                },
+                {
+                    data: 'status',
+                    render: function (data, type, row, meta) {
+                        return data === 1 ? 'Dịch vụ'
+                            : data === 2 ? 'Thêm thông tin'
+                            : 'Khác';
+                    }
                 },
                 {
                     data: 'email',
@@ -126,10 +154,10 @@
                 {
                     data: 'status',
                     render: function (data, type, row, meta) {
-                        return `<select class="form-select rounded-3 status-select">
-                                    <option value="1" selected="">Mới</option>
-                                    <option value="2">Đã đọc</option>
-                                    <option value="3">Đã trả lời</option>
+                        return `<select class="form-select rounded status-select">
+                                    <option value="1" ${ status === 1 ? 'selected' : '' }>Mới</option>
+                                    <option value="2" ${ status === 2 ? 'selected' : '' }>Đã đọc</option>
+                                    <option value="3" ${ status === 3 ? 'selected' : '' }>Đã trả lời</option>
                                   </select>`;
                     }
                 },
@@ -143,6 +171,49 @@
                             </button>`
                 }
             ]
+        });
+
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+        });
+
+        $('#table-contacts').on('click', '.btn-delete', function () {
+            var data = table.row($(this).parents("tr")).data();
+            $('#modal-delete').find('#input-id').val(data.id);
+            $('#modal-delete').modal('show');
+        });
+
+        $('#modal-delete .btn-confirm').click(function () {
+            $.ajax({
+                url: '{{ route('admin.accounts.delete') }}',
+                type: 'POST',
+                data: {
+                    id: $('#modal-delete').find('#input-id').val()
+                },
+                beforeSend: function() {
+                    $('.bg-loading').removeClass('d-none').addClass('d-flex');
+                },
+                success: function (response) {
+                    if (response){
+                        success('Xóa tài khoản Admin thành công.');
+                        $('#modal-delete .close').trigger('click');
+                    }
+                },
+                error: function () {
+                    $(document).Toasts("create", {
+                        class: "bg-danger",
+                        title: "Thất bại",
+                        autohide: true,
+                        delay: 2000,
+                        body: "Lỗi khi trong khi cập nhật trạng thái.",
+                    });
+                },
+                complete: function(){
+                    $('.bg-loading').removeClass('d-flex').addClass('d-none');
+                }
+            });
         });
     </script>
 @endsection

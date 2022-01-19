@@ -79,13 +79,13 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">確認</h4>
+                    <h4 class="modal-title">Xác nhận</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Bạn có chắc chắn với hành động của mình không？</p>
+                    <p>Bạn có chắc chắn với hành động của mình không?</p>
                     <form action="{{ route('admin.accounts.delete') }}">
                         <input id="_id" type="hidden" name="id" value="" />
                     </form>

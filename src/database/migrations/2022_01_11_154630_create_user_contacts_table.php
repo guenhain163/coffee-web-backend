@@ -21,8 +21,8 @@ class CreateUserContactsTable extends Migration
             $table->longText('feedback');
             $table->tinyInteger('option')->comment('1-Service, 2-More Information, 3-Other');
             $table->tinyInteger('status')->default(1)->comment('1-New, 2-Read, 3-Replied');
-            $table->timestamp('created_at');
-            $table->timestamp('updated_at');
+            $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));;
             $table->softDeletes();
         });
     }

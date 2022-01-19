@@ -21,7 +21,9 @@ Route::namespace('Admin')->group(function () {
         });
 
         Route::prefix('contacts')->group(function () {
-            Route::get('/', 'ContactController@index')->name('admin.contacts.index');
+            Route::get('/', 'UserContactController@index')->name('admin.contacts.index');
+            Route::get('/show', 'UserContactController@show')->name('admin.contacts.show');
+            Route::post('/delete', 'UserContactController@delete')->name('admin.contacts.delete');
         });
 
         Route::prefix('accounts')->group(function () {
