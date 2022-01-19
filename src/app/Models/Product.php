@@ -13,6 +13,8 @@ class Product extends Model
 
     public const STATUS_BLOCKED = 0;
     public const STATUS_ACTIVE = 1;
+    public const FAVORITE = 1;
+    public const NOT_FAVORITE = 0;
 
     protected $fillable = [
         'title',
@@ -20,6 +22,7 @@ class Product extends Model
         'description',
         'price',
         'category_id',
+        'favorite',
         'status'
     ];
 
