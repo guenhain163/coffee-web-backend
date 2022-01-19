@@ -19,6 +19,8 @@
 <script src="/admin-lte/plugins/jquery-validation/jquery.validate.min.js"></script>
 <!-- Input mask -->
 <script src="/admin-lte/plugins/inputmask/jquery.inputmask.min.js"></script>
+<!-- MomentJs -->
+<script src="/admin-lte/plugins/moment/moment.min.js"></script>
 <script>
     @if($message = session('success'))
     $(function () {

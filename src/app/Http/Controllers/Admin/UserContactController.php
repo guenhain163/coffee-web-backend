@@ -30,4 +30,9 @@ class UserContactController extends Controller
     {
         return $this->userContactService->delete($request->get('id'));
     }
+
+    public function update(Request $request)
+    {
+        return $this->userContactService->update($request->all());
+    }
 }

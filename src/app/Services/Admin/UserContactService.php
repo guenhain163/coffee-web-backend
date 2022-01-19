@@ -4,6 +4,7 @@ namespace App\Services\Admin;
 
 use App\Services\BaseService;
 use App\Repositories\UserContactRepository;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 
 class UserContactService extends BaseService
@@ -22,6 +23,11 @@ class UserContactService extends BaseService
 
     public function delete($id)
     {
-        return $this->userContactRepository->delete($id);
+        return $this->userContactRepository->update(['deleted_at' => Carbon::now()], $id);
+    }
+
+    public function update($data)
+    {
+        return $this->userContactRepository->update($data, $data['id']);
     }
 }

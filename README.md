@@ -37,6 +37,8 @@ $ docker-compose exec app ash
 
 [/work/app]
 
+$php artisan storage:link
+
 $php artisan key:generate
 
 $php artisan migrate
