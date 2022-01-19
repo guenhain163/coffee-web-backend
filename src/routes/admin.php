@@ -9,7 +9,7 @@ Route::namespace('Admin')->group(function () {
     Route::post('login', 'Auth\LoginController@login')->name('admin.login');
     Route::get('logout', 'Auth\LoginController@logout')->name('admin.logout');
     Route::group(['middleware' => ['auth:admin']], function () {
-        Route::get('/', 'AdminController@index')->name('admin.index');
+        Route::get('/', 'DashboardController@index')->name('admin.index');
 
         Route::prefix('products')->group(function () {
             Route::get('/', 'ProductController@index')->name('admin.products.index');
@@ -22,6 +22,14 @@ Route::namespace('Admin')->group(function () {
 
         Route::prefix('contacts')->group(function () {
             Route::get('/', 'ContactController@index')->name('admin.contacts.index');
+        });
+
+        Route::prefix('accounts')->group(function () {
+            Route::get('/', 'AdminController@index')->name('admin.accounts.index');
+            Route::get('/show', 'AdminController@show')->name('admin.accounts.show');
+            Route::post('/create', 'AdminController@create')->name('admin.accounts.create');
+            Route::post('/update', 'AdminController@update')->name('admin.accounts.update');
+            Route::post('/delete', 'AdminController@delete')->name('admin.accounts.delete');
         });
     });
 

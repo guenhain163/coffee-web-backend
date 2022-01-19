@@ -43,13 +43,14 @@
                     <p>Quản lý hòm thư</p>
                 </a>
             </li>
-            <li class="nav-item mb-2">
-                <a href="#" class="nav-link m-auto">
-{{--                <a href="{{ route('admin.accounts.index') }}" class="nav-link m-auto {{ Request::is('admin/accounts') ? 'active' : '' }}">--}}
-                    <i class="nav-icon fas fa-users-cog"></i>
-                    <p>Quản lý Admin</p>
-                </a>
-            </li>
+            @if(\Illuminate\Support\Facades\Auth::user()->role === 1)
+                <li class="nav-item mb-2">
+                    <a href="{{ route('admin.accounts.index') }}" class="nav-link m-auto {{ Request::is('admin/accounts') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-users-cog"></i>
+                        <p>Quản lý Admin</p>
+                    </a>
+                </li>
+            @endif
             <li class="nav-item mb-2">
                 <a href="{{ route('admin.logout') }}" class="nav-link m-auto">
                     <i class="nav-icon fas fa-sign-out-alt"></i>

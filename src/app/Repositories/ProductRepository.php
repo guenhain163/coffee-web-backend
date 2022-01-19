@@ -24,11 +24,11 @@ class ProductRepository extends BaseRepository
 
     public function getProductByCategory($category_id)
     {
-        return $this->model->where('category_id', '=', $category_id)->get();
+        return $this->model->whereCategoryId($category_id)->get();
     }
 
     public function getFavoriteProduct()
     {
-        return $this->model->orderBy('id', 'ASC')->where('status', '=', '1')->get();
+        return $this->model->orderBy('id', 'ASC')->whereFavorite(Product::FAVORITE)->get();
     }
 }

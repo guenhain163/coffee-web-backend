@@ -24,11 +24,32 @@
     $(function () {
         $(document).Toasts("create", {
             class: "bg-success",
-            title: "失敗",
+            title: "Thành công",
             autohide: true,
             delay: 2000,
             body: '{{ $message }}',
         });
     });
     @endif
+
+    function success(mess) {
+        $(document).Toasts("create", {
+            class: "bg-success",
+            title: "Thành công",
+            autohide: true,
+            delay: 2000,
+            body: mess,
+        });
+        table.ajax.reload(null, false);
+    }
+
+    function fail(mess) {
+        $(document).Toasts("create", {
+            class: "bg-danger",
+            title: "Thất bại",
+            autohide: true,
+            delay: 2000,
+            body: mess,
+        });
+    }
 </script>

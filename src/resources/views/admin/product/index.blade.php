@@ -339,27 +339,6 @@
         });
 
         $(document).ready(function (e) {
-            function success(mess) {
-                $(document).Toasts("create", {
-                    class: "bg-success",
-                    title: "Thành công",
-                    autohide: true,
-                    delay: 2000,
-                    body: mess,
-                });
-                table.ajax.reload(null, false);
-            }
-
-            function fail(mess) {
-                $(document).Toasts("create", {
-                    class: "bg-danger",
-                    title: "Thất bại",
-                    autohide: true,
-                    delay: 2000,
-                    body: mess,
-                });
-            }
-
             $("#input-price").inputmask("decimal", {
                 radixPoint: ".",
                 groupSeparator: ",",
