@@ -13,6 +13,6 @@ class UserContactRepository extends BaseRepository
 
     public function getContactList()
     {
-        return $this->model->select();
+        return $this->model->whereNull('deleted_at')->select();
     }
 }
