@@ -38,10 +38,9 @@
                 </a>
             </li>
             <li class="nav-item mb-2">
-                <a href="#" class="nav-link m-auto">
-{{--                <a href="{{ route('admin.contacts.index') }}" class="nav-link m-auto {{ Request::is('admin/contacts') ? 'active' : '' }}">--}}
+                <a href="{{ route('admin.contacts.index') }}" class="nav-link m-auto {{ Request::is('admin/contacts') ? 'active' : '' }}">
                     <i class="nav-icon fas fa-address-card"></i>
-                    <p>Quản lý liên hệ</p>
+                    <p>Quản lý hòm thư</p>
                 </a>
             </li>
             <li class="nav-item mb-2">

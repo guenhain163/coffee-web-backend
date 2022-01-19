@@ -2,6 +2,7 @@
 
 @section('style')
     <link rel="stylesheet" href="/assets/css/custom.css">
+    <link rel="stylesheet" href="/assets/css/product.css">
 @endsection
 
 @section('content')
@@ -19,7 +20,7 @@
                 </div>
             </div>
             <div class="table-responsive box-table">
-                <table class="table" id="table-products">
+                <table class="table display nowrap" id="table-products">
                     <thead>
                     <tr>
                         <th scope="col">STT</th>
@@ -68,15 +69,40 @@
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"></h5>
+                    <h5 class="modal-title">Thông tin sản phẩm</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body product-detail">
                     <div class="row">
-                        <div class="col-12 col-lg-6"></div>
-                        <div class="col-12 col-lg-6"></div>
+                        <div class="col-12 col-lg-4">
+                            <div class="">
+                                <img width="200" height="200" src="" class="rounded mx-auto img-thumbnail" alt="">
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-8">
+                            <div class="row mb-3">
+                                <div class="col-12 d-flex align-items-center">
+                                    <div class="title">Bạc xỉu</div>
+                                    <div class="">
+                                        <div class="category">Cà phê</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-12">
+                                    <span class="font-weight-bold">Giá: </span>
+                                    <span class="price">45,000</span>
+                                    <span> đ</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="description"></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -117,7 +143,94 @@
                         <div class="form-group">
                             <label for="input-file">Ảnh sản phẩm</label>
                             <div class="row">
+                                <div class="col-12 col-lg-6 mb-3 mb-lg-0">
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <input type="file" name="image" class="form-control custom-file-input" id="input-file">
+                                            <label class="custom-file-label" for="input-file">Chọn ảnh</label>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col-12 col-lg-6">
+                                    <div class="text-center">
+                                        <img id="image_preview_container" src="{{ asset('storage/image/products/image-preview.png') }}"
+                                             alt="preview image" style="max-height: 300px;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-price">Giá sản phẩm:</label>
+                            <input type="text" name="price" class="form-control" id="input-price" placeholder="Nhập giá sản phẩm">
+                        </div>
+                        <div class="form-group">
+                            <label for="input-description">Mô tả:</label>
+                            <textarea name="description" class="form-control no-resize" id="input-description" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                        <button type="submit" class="btn btn-brown">Lưu</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="modalDelete" aria-hidden="true">
+        <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <form action="{{ route('admin.products.delete') }}" method="POST" autocomplete="off">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Xóa sản phẩm</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Bạn chắc chắn xóa sản phẩm này chứ?
+                        <input type="hidden" name="id">
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                        <button type="submit" class="btn btn-brown">Xóa</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modal-edit" tabindex="-1" role="dialog" aria-labelledby="modalEdit" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <form action="{{ route('admin.products.edit') }}" method="POST" id="form-edit" enctype="multipart/form-data" autocomplete="off">
+                    <div class="modal-header">
+                        <h5 class="modal-title font-weight-bold">Xem sản phẩm</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body px-5">
+                        <div class="row">
+                            <div class="col-12 col-lg-8">
+                                <div class="form-group">
+                                    <label for="input-title">Tên sản phẩm:</label>
+                                    <input type="text" name="title" class="form-control" id="input-title" placeholder="Nhập tên sản phẩm">
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-4">
+                                <div class="form-group">
+                                    <label for="input-category">Category</label>
+                                    <select class="form-control" name="category" id="input-category">
+                                        @foreach($categories as $category)
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-file">Ảnh sản phẩm</label>
+                            <div class="row">
+                                <div class="col-12 col-lg-6 mb-3 mb-lg-0">
                                     <div class="input-group">
                                         <div class="custom-file">
                                             <input type="file" name="image" class="form-control custom-file-input" id="input-file">
@@ -212,13 +325,13 @@
                 },
                 {
                     data: null,
-                    defaultContent: `<button class="btn btn-outline" data-toggle="modal" data-target="#modal-detail">
+                    defaultContent: `<button class="btn btn-outline btn-show">
                                 <i class="far fa-eye"></i>
                             </button>
-                            <button class="btn btn-outline">
+                            <button class="btn btn-outline btn-edit">
                                 <i class="far fa-edit"></i>
                             </button>
-                            <button class="btn btn-outline">
+                            <button class="btn btn-outline btn-delete">
                                 <i class="far fa-trash-alt"></i>
                             </button>`
                 }
@@ -338,9 +451,7 @@
                     } else {
                         error.insertAfter(element);
                     }
-                },
-                submitHandler: function () {
-                },
+                }
             });
 
             $("#modal-add").on("hide.bs.modal", function () {
@@ -381,6 +492,100 @@
                         $("#form-add button[type='submit']").removeAttr("disabled").html("Lưu");
                     }
                 });
+            });
+
+            $('#table-products').on('click', '.btn-delete', function () {
+                var data = table.row($(this).parents("tr")).data();
+                $('#modal-delete').find('input[name="id"]').val(data.id);
+                $('#modal-delete').modal('show');
+            });
+
+            $('#modal-delete button[type="submit"]').click(function(e) {
+                e.preventDefault();
+                $.ajax({
+                    type: $('#modal-delete form').attr('method'),
+                    url: $('#modal-delete form').attr('action'),
+                    data: $('#modal-delete form').serialize(),
+                    beforeSend: function () {
+                        $('#modal-delete button[type="submit"]').attr("disabled", "")
+                            .html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Xóa');
+                    },
+                    success: (data) => {
+                        if(data) {
+                            $('#modal-delete').modal('hide');
+                            success('Bạn đã xóa sản phẩm thành công.');
+                        }
+                    },
+                    error: function(){
+                        fail('Xóa sản phẩm thất bại, hãy kiểm tra lại.');
+                    },
+                    complete: function () {
+                        $('#modal-delete button[type="submit"]').removeAttr("disabled").html("Xóa");
+                    }
+                });
+            });
+
+            $('#table-products').on('click', '.btn-edit', function () {
+                var data = table.row($(this).parents("tr")).data();
+                $('#form-edit').find('#input-title').val(data.title);
+                $('#form-edit').find('#input-category option[value="' + data.category + '"]').prop('selected', true);
+                $('#form-edit').find('#image_preview_container').attr('src', '/storage' + data.link_image);
+                $('#form-edit').find('#input-price').val(data.price);
+                $('#form-edit').find('#input-description').val(data.description);
+                $('#modal-edit').modal('show');
+            });
+
+            $("#modal-edit").on("hide.bs.modal", function () {
+                $('.form-control').val('');
+                $('#input-category option:first-child').prop('selected', true);
+                $('.custom-file-label').text('Chọn ảnh');
+                $('#image_preview_container').attr('src', '{{ asset('storage/image/products/image-preview.png') }}');
+                // validator.resetForm();
+            });
+
+            $('#table-products').on('click', '.btn-switch', function () {
+                var data = table.row($(this).parents("tr")).data();
+
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route('admin.products.updateStatus') }}',
+                    data: {
+                        status: data['status'],
+                        id: data['id']
+                    },
+                    beforeSend: function () {
+                        $('.bg-loading').removeClass('d-none').addClass('d-flex');
+                    },
+                    success: (data) => {
+                        if(data) {
+                            success('Bạn đã xóa sản phẩm thành công.');
+                        }
+                    },
+                    error: function(){
+                        fail('Thay đổi trạng thái sản phẩm thất bại, hãy kiểm tra lại.');
+                    },
+                    complete: function () {
+                        $('.bg-loading').removeClass('d-flex').addClass('d-none');
+                    }
+                });
+            });
+
+            $('#table-products').on('click', '.btn-show', function () {
+                var data = table.row($(this).parents("tr")).data();
+                $('#modal-detail').find('.title').text(data.title);
+                $('#modal-detail').find('.category').text(data.category.name);
+                $('#modal-detail').find('.img-thumbnail').attr('src', '/storage' + data.link_image);
+                $('#modal-detail').find('.price').text($.number(data.price, 0, '.', ','));
+                $('#modal-detail').find('.description').text(data.description);
+                $('#modal-detail').modal('show');
+            });
+
+            $("#modal-detail").on("hide.bs.modal", function () {
+                {{--$('.form-control').val('');--}}
+                {{--$('#input-category option:first-child').prop('selected', true);--}}
+                {{--$('.custom-file-label').text('Chọn ảnh');--}}
+                {{--$('#image_preview_container').attr('src', '{{ asset('storage/image/products/image-preview.png') }}');--}}
+                // validator.resetForm();
             });
         });
     </script>

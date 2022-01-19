@@ -39,7 +39,18 @@ class ProductService extends BaseService
             'price' => preg_replace('/\D/', '', $data->price),
             'category_id' => $data->category
         ]);
-        
+
         return $product;
+    }
+
+    public function delete($data)
+    {
+        return $this->productRepository->delete($data->id);
+    }
+
+    public function updateStatus($data)
+    {
+        $status = $data['status'] ? Product::STATUS_BLOCKED : Product::STATUS_ACTIVE;
+        return $this->productRepository->update(['status' => $status], $data->id);
     }
 }

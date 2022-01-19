@@ -149,3 +149,18 @@ label.error {
     width: 100%;
     margin-bottom: 0;
 }
+
+th, td { white-space: nowrap; }
+.table-responsive .dataTables_scrollBody {
+    position: static!important;
+}
+div.dataTables_wrapper {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.table {
+    width: 100%;
+    min-width: 1200px;
+    overflow-x: auto;
+}

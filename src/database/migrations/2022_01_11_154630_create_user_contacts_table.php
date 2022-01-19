@@ -16,12 +16,13 @@ class CreateUserContactsTable extends Migration
         Schema::create('user_contacts', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name', 100);
-            $table->string('phone', 20);
+            $table->string('phone', 20)->nullable();
             $table->string('email', 100);
             $table->longText('feedback');
-            $table->tinyInteger('option');
+            $table->tinyInteger('option')->comment('');
+            $table->tinyInteger('status')->default(1)->comment('1-New, 2-Read, 3-Replied');
             $table->timestamp('created_at');
-            $table->timestamp('updated_at')->nullable();
+            $table->timestamp('updated_at');
             $table->softDeletes();
         });
     }

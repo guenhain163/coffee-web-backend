@@ -11,6 +11,9 @@ class Product extends Model
 
     protected $table = 'products';
 
+    public const STATUS_BLOCKED = 0;
+    public const STATUS_ACTIVE = 1;
+
     protected $fillable = [
         'title',
         'link_image',
