@@ -14,7 +14,11 @@ class ProductRepository extends BaseRepository
 
     public function getProductList()
     {
-//        return $this->model->with('category')->select()->get();
+        return $this->model->with('category');
+    }
+
+    public function getProductListOrderByCategory()
+    {
         return $this->model->orderBy('id', 'ASC')->with('category')->get();
     }
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Services\Admin\ProductService;
 use App\Services\Admin\CategoryService;
 use App\Http\Requests\CreateProductRequest;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Yajra\DataTables\DataTables;
 
@@ -37,5 +38,15 @@ class ProductController extends Controller
     public function create(CreateProductRequest $request)
     {
         return $this->productService->create($request);
+    }
+
+    public function delete(Request $request)
+    {
+        return $this->productService->delete($request);
+    }
+
+    public function updateStatus(Request $request)
+    {
+        return $this->productService->updateStatus($request);
     }
 }

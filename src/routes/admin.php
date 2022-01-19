@@ -10,10 +10,18 @@ Route::namespace('Admin')->group(function () {
     Route::get('logout', 'Auth\LoginController@logout')->name('admin.logout');
     Route::group(['middleware' => ['auth:admin']], function () {
         Route::get('/', 'AdminController@index')->name('admin.index');
+
         Route::prefix('products')->group(function () {
             Route::get('/', 'ProductController@index')->name('admin.products.index');
             Route::get('/show', [ProductController::class, 'show'])->name('admin.products.show');
             Route::post('/create', [ProductController::class, 'create'])->name('admin.products.create');
+            Route::post('/edit', [ProductController::class, 'edit'])->name('admin.products.edit');
+            Route::post('/delete', [ProductController::class, 'delete'])->name('admin.products.delete');
+            Route::post('/update', [ProductController::class, 'updateStatus'])->name('admin.products.updateStatus');
+        });
+
+        Route::prefix('contacts')->group(function () {
+            Route::get('/', 'ContactController@index')->name('admin.contacts.index');
         });
     });
 

@@ -27,7 +27,7 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        return responseOK(new ProductCollection($this->productRepository->getProductList($request)));
+        return responseOK(new ProductCollection($this->productRepository->getProductListOrderByCategory($request)));
     }
 
     /**
