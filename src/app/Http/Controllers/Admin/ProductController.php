@@ -7,7 +7,6 @@ use App\Services\Admin\ProductService;
 use App\Services\Admin\CategoryService;
 use App\Http\Requests\CreateProductRequest;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Yajra\DataTables\DataTables;
 
 class ProductController extends Controller

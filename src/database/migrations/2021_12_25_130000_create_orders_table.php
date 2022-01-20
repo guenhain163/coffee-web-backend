@@ -15,11 +15,14 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('order_code');
             $table->unsignedBigInteger('staff_id');
             $table->unsignedBigInteger('customer_id')->nullable();
-            $table->integer('discount')->default(0);
-            $table->integer('total_price');
-            $table->date('order_date');
+//            $table->integer('discount')->default(0);
+            $table->decimal('total_price', 9, 2)->default(0);
+            $table->decimal('customer_paid', 9, 2)->default(0);
+            $table->decimal('refunds', 9, 2)->default(0);
+            $table->timestamp('order_date');
             $table->text('note')->nullable();
             $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));

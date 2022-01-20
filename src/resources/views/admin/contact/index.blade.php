@@ -145,7 +145,11 @@
             columnDefs: [
                 {
                     className: 'text-center',
-                    targets: [0, 3, 4, 5, 6]
+                    targets: [0, 3, 4, 6]
+                },
+                {
+                    className: 'text-left',
+                    targets: [5]
                 }
             ],
             ajax: {
@@ -179,7 +183,12 @@
                     data: 'phone'
                 },
                 {
-                    data: 'feedback'
+                    data: 'feedback',
+                    render: function (data, type, row, meta) {
+                        return data.length > 50 ?
+                            data.substr(0, 50) + '…' :
+                            data;;
+                    }
                 },
                 {
                     data: 'status',

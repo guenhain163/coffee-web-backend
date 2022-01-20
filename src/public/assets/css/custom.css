@@ -179,3 +179,33 @@ div.dataTables_wrapper {
     align-items: center;
     background: rgba(63, 63, 63, 0.5);
 }
+
+[class*=sidebar-dark-] {
+    background-color: #5D261B;
+}
+
+.sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active, .sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active
+{
+    background: #F0E2CA;
+    color: #5D261B;
+}
+
+.page-link, .page-link:hover {
+    color: #5D261B;
+}
+
+[class*=sidebar-dark-] .sidebar a {
+    color: #ffffff;
+}
+
+[class*=sidebar-dark] .brand-link {
+    border-bottom: 1px solid #F0E2CA;
+}
+
+.content-wrapper {
+    background-color: #faf8f5;
+}
+
+.brand-link .brand-image {
+    float: none;
+}

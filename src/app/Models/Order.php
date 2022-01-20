@@ -10,14 +10,22 @@ class Order extends Model
 {
     use HasFactory;
 
-    protected $table = 'orders';
+    protected $table = 'orders_detail';
 
     protected $fillable = [
+        'order_code',
         'staff_id',
         'customer_id',
         'discount',
         'total_price',
+        'customer_paid',
+        'refunds',
         'order_date',
         'note',
     ];
+
+    public function orderDetail()
+    {
+        return $this->hasMany(OrderDetail::class, 'id');
+    }
 }

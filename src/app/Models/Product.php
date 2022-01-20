@@ -17,10 +17,12 @@ class Product extends Model
     public const NOT_FAVORITE = 0;
 
     protected $fillable = [
+        'product_code',
         'title',
         'link_image',
         'description',
         'price',
+        'reduced_price',
         'category_id',
         'favorite',
         'status'
@@ -28,6 +30,6 @@ class Product extends Model
 
     public function category()
     {
-        return $this->belongsTo(Category::class, 'id');
+        return $this->belongsTo(Category::class, 'category_id');
     }
 }

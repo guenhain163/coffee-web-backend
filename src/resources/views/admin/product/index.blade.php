@@ -32,32 +32,6 @@
                         <th scope="col"></th>
                     </tr>
                     </thead>
-                    <tbody>
-{{--                    <tr>--}}
-{{--                        <td class="text-center">1</td>--}}
-{{--                        <td>Trà đào cam xả</td>--}}
-{{--                        <td></td>--}}
-{{--                        <td class="text-center">45.000đ</td>--}}
-{{--                        <td>Trà</td>--}}
-{{--                        <td class="text-center">--}}
-{{--                            <div class="btn-group btn-toggle rounded-pill btn-switch">--}}
-{{--                                <button class="btn btn-sm btn-check-active rounded-pill active">On</button>--}}
-{{--                                <button class="btn btn-sm btn-check-unactive rounded-pill">Off</button>--}}
-{{--                            </div>--}}
-{{--                        </td>--}}
-{{--                        <td class="text-center">--}}
-{{--                            <button class="btn btn-outline" data-toggle="modal" data-target="#modal-detail">--}}
-{{--                                <i class="far fa-eye"></i>--}}
-{{--                            </button>--}}
-{{--                            <button class="btn btn-outline">--}}
-{{--                                <i class="far fa-edit"></i>--}}
-{{--                            </button>--}}
-{{--                            <button class="btn btn-outline">--}}
-{{--                                <i class="far fa-trash-alt"></i>--}}
-{{--                            </button>--}}
-{{--                        </td>--}}
-{{--                    </tr>--}}
-                    </tbody>
                 </table>
             </div>
         </div>

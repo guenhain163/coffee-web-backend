@@ -27,6 +27,11 @@ Route::namespace('Admin')->group(function () {
             Route::post('/update', 'UserContactController@update')->name('admin.contacts.update');
         });
 
+        Route::prefix('orders')->group(function () {
+            Route::get('/', 'OrderController@index')->name('admin.orders.index');
+            Route::get('/show', 'OrderController@show')->name('admin.orders.show');
+        });
+
         Route::prefix('accounts')->group(function () {
             Route::get('/', 'AdminController@index')->name('admin.accounts.index');
             Route::get('/show', 'AdminController@show')->name('admin.accounts.show');
