@@ -21,6 +21,7 @@ class Staff extends Model
         'address',
         'phone',
         'email',
+        'position',
         'status',
     ];
 }

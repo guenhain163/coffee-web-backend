@@ -1,12 +1,13 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="/admin-lte/index3.html" class="brand-link">
-      <img src="/admin-lte/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
+    <a href="{{ route('admin.index') }}" class="brand-link">
+        <i class="brand-image img-circle elevation-3 fas fa-tachometer-alt"></i>
+{{--      <img src="/assets/images/logo-light.svg" alt="Hibiki Logo" class="brand-image img-circle elevation-3" style="opacity: .8">--}}
+      <span class="brand-text font-weight-bold">Admin Hibiki</span>
     </a>
 
     <!-- Sidebar -->
-    <nav class="mt-5 pt-3">
+    <nav class="mt-5 sidebar pt-3">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
                  with font-awesome or any other icon font library -->
@@ -24,22 +25,21 @@
                 </a>
             </li>
             <li class="nav-item mb-2">
-                <a href="#" class="nav-link m-auto">
-{{--                <a href="{{ route('admin.companies.index') }}" class="nav-link m-auto {{ Request::is('admin/companies') ? 'active' : '' }}">--}}
-                    <i class="nav-icon fas fa-building"></i>
+                <a href="{{ route('admin.orders.index') }}" class="nav-link m-auto {{ Request::is('admin/orders') ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-money-bill"></i>
                     <p>Quản lý hóa đơn</p>
                 </a>
             </li>
             <li class="nav-item mb-2">
                 <a href="#" class="nav-link m-auto">
 {{--                <a href="{{ route('admin.invoices.index') }}" class="nav-link m-auto {{ Request::is('admin/invoices') ? 'active' : '' }}">--}}
-                    <i class="nav-icon fas fa-money-bill"></i>
+                    <i class="nav-icon fas fa-calendar-week"></i>
                     <p>Quản lý lịch làm</p>
                 </a>
             </li>
             <li class="nav-item mb-2">
                 <a href="{{ route('admin.contacts.index') }}" class="nav-link m-auto {{ Request::is('admin/contacts') ? 'active' : '' }}">
-                    <i class="nav-icon fas fa-address-card"></i>
+                    <i class="nav-icon fas fa-envelope"></i>
                     <p>Quản lý hòm thư</p>
                 </a>
             </li>

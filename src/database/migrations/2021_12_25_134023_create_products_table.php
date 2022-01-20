@@ -15,11 +15,13 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('product_code');
             $table->string('title');
             $table->unsignedBigInteger('category_id');
             $table->string('link_image')->nullable();
             $table->longText('description');
             $table->decimal('price', 9, 2)->default(0);
+            $table->decimal('reduced_price', 9, 2)->nullable();
             $table->tinyInteger('favorite')->default(0)->comment('0: Not favorite , 1: Favorite');
             $table->tinyInteger('status')->default(1)->comment('0: Block , 1: Active');
             $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
