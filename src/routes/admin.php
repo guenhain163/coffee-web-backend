@@ -28,8 +28,11 @@ Route::namespace('Admin')->group(function () {
         });
 
         Route::prefix('orders')->group(function () {
-            Route::get('/', 'OrderController@index')->name('admin.orders.index');
+            Route::get('/all', 'OrderController@index')->name('admin.orders.index');
+            Route::get('/new', 'OrderController@newOrder')->name('admin.orders.new');
             Route::get('/show', 'OrderController@show')->name('admin.orders.show');
+            Route::get('/update', 'OrderController@update')->name('admin.orders.update');
+            Route::get('/detail', 'OrderController@orderDetail')->name('admin.orders.orderDetail');
         });
 
         Route::prefix('accounts')->group(function () {

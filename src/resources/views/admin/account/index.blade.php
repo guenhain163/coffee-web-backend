@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div class="table-responsive box-table">
-                <table class="table display nowrap" id="table-accounts">
+                <table class="table table-list display nowrap" id="table-accounts">
                     <thead>
                     <tr>
                         <th scope="col">STT</th>

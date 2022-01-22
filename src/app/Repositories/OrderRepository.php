@@ -14,6 +14,6 @@ class OrderRepository extends BaseRepository
 
     public function getOrderList()
     {
-        return $this->model->with('category');
+        return $this->model->with(['orderDetail', 'staff', 'customer']);
     }
 }

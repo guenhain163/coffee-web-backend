@@ -159,7 +159,7 @@ div.dataTables_wrapper {
     margin: 0 auto;
 }
 
-.table {
+.table-list {
     width: 100%;
     min-width: 1200px;
     overflow-x: auto;
@@ -208,4 +208,8 @@ div.dataTables_wrapper {
 
 .brand-link .brand-image {
     float: none;
+}
+
+textarea {
+    resize: none;
 }

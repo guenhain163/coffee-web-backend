@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div class="table-responsive box-table">
-                <table class="table display nowrap" id="table-products">
+                <table class="table table-list display nowrap" id="table-products">
                     <thead>
                     <tr>
                         <th scope="col">STT</th>
@@ -253,6 +253,10 @@
                 {
                     className: 'text-center',
                     targets: [0, 3, 4, 5, 6]
+                },
+                {
+                    className: 'text-left',
+                    targets: [2]
                 }
             ],
             ajax: {

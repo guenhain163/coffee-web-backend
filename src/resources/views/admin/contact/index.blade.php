@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="table-responsive box-table">
-                <table class="table display nowrap" id="table-contacts">
+                <table class="table table-list display nowrap" id="table-contacts">
                     <thead>
                     <tr>
                         <th scope="col">STT</th>
@@ -263,7 +263,7 @@
 
         $('#table-contacts').on('click', '.btn-show', function () {
             var data = table.row($(this).parents("tr")).data();
-            console.log(data);
+
             $('#modal-detail').find('.dt-name').text(data.name);
             $('#modal-detail').find('.dt-option').text(data.option === 1 ? 'Dịch vụ' : data.option === 2 ? 'Thêm thông tin' : 'Khác');
             $('#modal-detail').find('.dt-email').text(data.email);
