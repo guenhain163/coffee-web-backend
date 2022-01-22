@@ -12,47 +12,63 @@
             <!-- Add icons to the links using the .nav-icon class
                  with font-awesome or any other icon font library -->
             <li class="nav-item mb-2">
-                <a href="{{ route('admin.index') }}" class="nav-link m-auto {{ Request::is('admin') || Request::is('admin/dashboard/*') ?
+                <a href="{{ route('admin.index') }}" class="nav-link mx-auto {{ Request::is('admin') || Request::is('admin/dashboard/*') ?
                                                         'active' : '' }}">
                     <i class="nav-icon fas fa-tachometer-alt"></i>
                     <p>Dashboard</p>
                 </a>
             </li>
             <li class="nav-item mb-2">
-                <a href="{{ route('admin.products.index') }}" class="nav-link m-auto {{ Request::is('admin/products') ? 'active' : '' }}">
+                <a href="{{ route('admin.products.index') }}" class="nav-link mx-auto {{ Request::is('admin/products') ? 'active' : '' }}">
                     <i class="nav-icon fas fa-user"></i>
                     <p>Quản lý sản phẩm</p>
                 </a>
             </li>
-            <li class="nav-item mb-2">
-                <a href="{{ route('admin.orders.index') }}" class="nav-link m-auto {{ Request::is('admin/orders') ? 'active' : '' }}">
+            <li class="nav-item mb-2 {{ Request::is('admin/orders/*') ? 'menu-is-opening menu-open' : '' }}">
+                <a href="#" class="nav-link mx-auto {{ Request::is('admin/orders/*') ? 'active' : '' }}">
                     <i class="nav-icon fas fa-money-bill"></i>
-                    <p>Quản lý hóa đơn</p>
+                    <p>Quản lý hóa đơn
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
                 </a>
+                <ul class="nav nav-treeview" style="{{ Request::is('admin/orders/*') ? 'display:block' : '' }}">
+                    <li class="nav-item">
+                        <a href="{{ route('admin.orders.index') }}" class="nav-link {{ Request::is('admin/orders/all') ? 'active' : '' }}">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Toàn bộ hóa đơn</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.orders.new') }}" class="nav-link {{ Request::is('admin/orders/new') ? 'active' : '' }}">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Thêm hóa đơn</p>
+                        </a>
+                    </li>
+                </ul>
             </li>
             <li class="nav-item mb-2">
-                <a href="#" class="nav-link m-auto">
-{{--                <a href="{{ route('admin.invoices.index') }}" class="nav-link m-auto {{ Request::is('admin/invoices') ? 'active' : '' }}">--}}
+                <a href="#" class="nav-link mx-auto">
+{{--                <a href="{{ route('admin.invoices.index') }}" class="nav-link mx-auto {{ Request::is('admin/invoices') ? 'active' : '' }}">--}}
                     <i class="nav-icon fas fa-calendar-week"></i>
                     <p>Quản lý lịch làm</p>
                 </a>
             </li>
             <li class="nav-item mb-2">
-                <a href="{{ route('admin.contacts.index') }}" class="nav-link m-auto {{ Request::is('admin/contacts') ? 'active' : '' }}">
+                <a href="{{ route('admin.contacts.index') }}" class="nav-link mx-auto {{ Request::is('admin/contacts') ? 'active' : '' }}">
                     <i class="nav-icon fas fa-envelope"></i>
                     <p>Quản lý hòm thư</p>
                 </a>
             </li>
             @if(\Illuminate\Support\Facades\Auth::user()->role === 1)
                 <li class="nav-item mb-2">
-                    <a href="{{ route('admin.accounts.index') }}" class="nav-link m-auto {{ Request::is('admin/accounts') ? 'active' : '' }}">
+                    <a href="{{ route('admin.accounts.index') }}" class="nav-link mx-auto {{ Request::is('admin/accounts') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-users-cog"></i>
                         <p>Quản lý Admin</p>
                     </a>
                 </li>
             @endif
             <li class="nav-item mb-2">
-                <a href="{{ route('admin.logout') }}" class="nav-link m-auto">
+                <a href="{{ route('admin.logout') }}" class="nav-link mx-auto">
                     <i class="nav-icon fas fa-sign-out-alt"></i>
                     <p>Đăng xuất</p>
                 </a>

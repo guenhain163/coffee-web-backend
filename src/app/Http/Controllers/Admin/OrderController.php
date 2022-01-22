@@ -25,4 +25,18 @@ class OrderController extends Controller
     {
         return $dataTables->eloquent($this->orderService->getOrderList())->toJson();
     }
+
+    public function update(Request $request)
+    {
+        return $this->orderService->update($request->all());
+    }
+
+    public function orderDetail(Request $request)
+    {
+        return $this->orderService->orderDetail($request->get('id'));
+    }
+
+    public function newOrder() {
+        return view('admin.order.new');
+    }
 }

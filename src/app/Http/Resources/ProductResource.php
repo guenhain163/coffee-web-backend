@@ -23,6 +23,7 @@ class ProductResource extends JsonResource
             'price' => $this->price,
             'favorite' => $this->favorite,
             'status' => $this->status,
+            'reduced_price' => $this->reduced_price
         ];
     }
 }

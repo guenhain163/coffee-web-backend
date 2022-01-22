@@ -10,7 +10,7 @@ class Order extends Model
 {
     use HasFactory;
 
-    protected $table = 'orders_detail';
+    protected $table = 'orders';
 
     protected $fillable = [
         'order_code',
@@ -27,5 +27,15 @@ class Order extends Model
     public function orderDetail()
     {
         return $this->hasMany(OrderDetail::class, 'id');
+    }
+
+    public function staff()
+    {
+        return $this->belongsTo(Staff::class, 'staff_id');
+    }
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class, 'customer_id');
     }
 }
