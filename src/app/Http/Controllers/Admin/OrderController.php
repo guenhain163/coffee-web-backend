@@ -21,9 +21,17 @@ class OrderController extends Controller
         return view('admin.order.index');
     }
 
-    public function show(DataTables $dataTables)
+    public function show(Request $request)
     {
-        return $dataTables->eloquent($this->orderService->getOrderList())->toJson();
+        return collect(DataTables::eloquent($this->orderService->getOrderList())
+            ->filter(function ($query) use ($request) {
+                if ($request->get('order_code') && !is_null($request->get('order_code'))) {
+                    $query->where('order_code', $request->get('order_code'));
+                }
+                if ($request->get('order_date') && !is_null($request->get('order_date'))) {
+                    $query->whereDate('order_date', $request->get('order_date'));
+                }
+            }))->toJson();
     }
 
     public function update(Request $request)

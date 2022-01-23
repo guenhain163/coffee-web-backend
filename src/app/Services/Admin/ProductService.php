@@ -41,6 +41,10 @@ class ProductService extends BaseService
             'category_id' => $data->category
         ]);
 
+        $product = $this->productRepository->update([
+            'product_code' => str_pad($product->id,8,"0", STR_PAD_LEFT)
+        ], $product->id);
+
         return $product;
     }
 

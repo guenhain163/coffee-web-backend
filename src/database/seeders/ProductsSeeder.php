@@ -69,7 +69,7 @@ class ProductsSeeder extends Seeder
     public function run()
     {
         foreach($this->products as $key => $product){
-            $product['product_code'] = str_pad($key, 8, "0", STR_PAD_LEFT);
+            $product['product_code'] = str_pad($key + 1, 8, "0", STR_PAD_LEFT);
             Product::create($product);
         }
     }

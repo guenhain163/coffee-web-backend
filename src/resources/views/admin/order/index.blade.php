@@ -13,12 +13,29 @@
                     <h2>Quản lý danh sách hóa đơn</h2>
                 </div>
                 <div class="col-6 text-right">
-                    <button type="button" class="btn rounded-pill btn-add" id="btn_create_order" data-toggle="modal" data-target="#modal-add">
+                    <a href="{{ route('admin.orders.create') }}" type="button" class="btn rounded-pill btn-add" id="btn_create_order" data-toggle="modal" data-target="#modal-add">
                         <i class="fas fa-plus mr-2"></i>
                         Thêm mới
-                    </button>
+                    </a>
                 </div>
             </div>
+            <form class="form-search bg-light" autocomplete="off">
+                <div class="d-flex flex-column flex-xl-row p-4 border-dark bg-gradient-light img-rounded">
+                    <input type="text" class="form-control flex-grow-lg-1 mb-3 mb-xl-0 input-search mr-3"
+                           id="code"
+                           placeholder="Nhập mã hóa đơn"/>
+                    <input type="text" class="form-control flex-grow-lg-1 mb-3 mb-xl-0 input-search mr-3"
+                           id="date"
+                           placeholder="Nhập ngày"/>
+                    <div class="input-search d-flex flex-row">
+                        <button type="button" class="btn btn-brown d-flex align-items-center" id="btn-search"><i
+                                class="fas fa-search"></i><span
+                                class="ml-2">Tìm kiếm</span></button>
+                        <button type="reset" class="btn btn-default ml-2" id="btn-clear"><i
+                                class="fas fa-sync-alt"></i></button>
+                    </div>
+                </div>
+            </form>
             <div class="table-responsive box-table">
                 <table class="table table-list display nowrap" id="table-orders">
                     <thead>
@@ -236,8 +253,13 @@
                     targets: [0, 3, 4, 5, 6]
                 },
             ],
+            serverSide: true,
             ajax: {
                 url: "{!! route('admin.orders.show') !!}",
+                data: function (d) {
+                    d.order_code = $('#code').val() ?? '';
+                    d.order_date = $('#date').val() ?? '';
+                }
             },
             columns: [
                 {
@@ -375,6 +397,11 @@
             $('#modal-detail').find('#customer_paid').html('');
             $('#modal-detail').find('#refunds').html('');
             $('#modal-detail').find('#id_customer').html('');
+        });
+
+        $('#btn-search').click(function (e) {
+            e.preventDefault();
+            table.draw();
         });
     </script>
 @endsection
