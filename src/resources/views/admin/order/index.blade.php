@@ -13,19 +13,19 @@
                     <h2>Quản lý danh sách hóa đơn</h2>
                 </div>
                 <div class="col-6 text-right">
-                    <button type="button" class="btn rounded-pill btn-add" id="btn_create_order" data-toggle="modal" data-target="#modal-add">
+                    <a href="{{ route('admin.orders.create') }}" type="button" class="btn rounded-pill btn-add" id="btn_create_order" data-toggle="modal" data-target="#modal-add">
                         <i class="fas fa-plus mr-2"></i>
                         Thêm mới
-                    </button>
+                    </a>
                 </div>
             </div>
             <form class="form-search bg-light" autocomplete="off">
                 <div class="d-flex flex-column flex-xl-row p-4 border-dark bg-gradient-light img-rounded">
                     <input type="text" class="form-control flex-grow-lg-1 mb-3 mb-xl-0 input-search mr-3"
-                           id="order_code"
+                           id="code"
                            placeholder="Nhập mã hóa đơn"/>
                     <input type="text" class="form-control flex-grow-lg-1 mb-3 mb-xl-0 input-search mr-3"
-                           id="date_order"
+                           id="date"
                            placeholder="Nhập ngày"/>
                     <div class="input-search d-flex flex-row">
                         <button type="button" class="btn btn-brown d-flex align-items-center" id="btn-search"><i
@@ -90,11 +90,11 @@
                                 <div class="col-12 d-flex justify-content-between">
                                     <div class="left">
                                         <span class="title">Ngày bán: </span>
-                                        <span class="content" id="date">20/01/2022 13:00</span>
+                                        <span class="content" id="order_date">20/01/2022 13:00</span>
                                     </div>
                                     <div class="right">
                                         <span class="title">MHĐ: </span>
-                                        <span class="content" id="code">00000001</span>
+                                        <span class="content" id="order_code">00000001</span>
                                     </div>
                                 </div>
                             </div>
