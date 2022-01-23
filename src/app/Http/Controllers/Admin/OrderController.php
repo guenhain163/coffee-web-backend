@@ -37,6 +37,15 @@ class OrderController extends Controller
     }
 
     public function newOrder() {
-        return view('admin.order.new');
+        $staffs = $this->orderService->getStaffList();
+        return view('admin.order.new')->with('staffs', $staffs);;
+    }
+
+    public function getProductList() {
+        return $this->orderService->getProductList();
+    }
+
+    public function create(Request $request) {
+        return $this->orderService->create($request->all());
     }
 }
