@@ -19,6 +19,23 @@
                     </button>
                 </div>
             </div>
+            <form class="form-search bg-light" autocomplete="off">
+                <div class="d-flex flex-column flex-xl-row p-4 border-dark bg-gradient-light img-rounded">
+                    <input type="text" class="form-control flex-grow-lg-1 mb-3 mb-xl-0 input-search mr-3"
+                           id="order_code"
+                           placeholder="Nhập mã hóa đơn"/>
+                    <input type="text" class="form-control flex-grow-lg-1 mb-3 mb-xl-0 input-search mr-3"
+                           id="date_order"
+                           placeholder="Nhập ngày"/>
+                    <div class="input-search d-flex flex-row">
+                        <button type="button" class="btn btn-brown d-flex align-items-center" id="btn-search"><i
+                                class="fas fa-search"></i><span
+                                class="ml-2">Tìm kiếm</span></button>
+                        <button type="reset" class="btn btn-default ml-2" id="btn-clear"><i
+                                class="fas fa-sync-alt"></i></button>
+                    </div>
+                </div>
+            </form>
             <div class="table-responsive box-table">
                 <table class="table table-list display nowrap" id="table-orders">
                     <thead>
@@ -73,11 +90,11 @@
                                 <div class="col-12 d-flex justify-content-between">
                                     <div class="left">
                                         <span class="title">Ngày bán: </span>
-                                        <span class="content" id="order_date">20/01/2022 13:00</span>
+                                        <span class="content" id="date">20/01/2022 13:00</span>
                                     </div>
                                     <div class="right">
                                         <span class="title">MHĐ: </span>
-                                        <span class="content" id="order_code">00000001</span>
+                                        <span class="content" id="code">00000001</span>
                                     </div>
                                 </div>
                             </div>
@@ -236,8 +253,13 @@
                     targets: [0, 3, 4, 5, 6]
                 },
             ],
+            serverSide: true,
             ajax: {
                 url: "{!! route('admin.orders.show') !!}",
+                data: function (d) {
+                    d.order_code = $('#code').val() ?? '';
+                    d.order_date = $('#date').val() ?? '';
+                }
             },
             columns: [
                 {
@@ -375,6 +397,11 @@
             $('#modal-detail').find('#customer_paid').html('');
             $('#modal-detail').find('#refunds').html('');
             $('#modal-detail').find('#id_customer').html('');
+        });
+
+        $('#btn-search').click(function (e) {
+            e.preventDefault();
+            table.draw();
         });
     </script>
 @endsection

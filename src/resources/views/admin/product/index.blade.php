@@ -246,7 +246,7 @@
                         </div>
                         <div class="form-group">
                             <label for="input-price">Giá sản phẩm:</label>
-                            <input type="text" name="price" class="form-control" id="input-price" placeholder="Nhập giá sản phẩm">
+                            <input type="text" name="price" class="form-control money" id="input-price" placeholder="Nhập giá sản phẩm">
                         </div>
                         <div class="form-group">
                             <label for="input-price">Giá sản phẩm giảm:</label>

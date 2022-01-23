@@ -11,13 +11,13 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
                  with font-awesome or any other icon font library -->
-            <li class="nav-item mb-2">
-                <a href="{{ route('admin.index') }}" class="nav-link mx-auto {{ Request::is('admin') || Request::is('admin/dashboard/*') ?
-                                                        'active' : '' }}">
-                    <i class="nav-icon fas fa-tachometer-alt"></i>
-                    <p>Dashboard</p>
-                </a>
-            </li>
+{{--            <li class="nav-item mb-2">--}}
+{{--                <a href="{{ route('admin.index') }}" class="nav-link mx-auto {{ Request::is('admin') || Request::is('admin/dashboard/*') ?--}}
+{{--                                                        'active' : '' }}">--}}
+{{--                    <i class="nav-icon fas fa-tachometer-alt"></i>--}}
+{{--                    <p>Dashboard</p>--}}
+{{--                </a>--}}
+{{--            </li>--}}
             <li class="nav-item mb-2">
                 <a href="{{ route('admin.products.index') }}" class="nav-link mx-auto {{ Request::is('admin/products') ? 'active' : '' }}">
                     <i class="nav-icon fas fa-user"></i>
@@ -46,13 +46,13 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item mb-2">
-                <a href="#" class="nav-link mx-auto">
+{{--            <li class="nav-item mb-2">--}}
+{{--                <a href="#" class="nav-link mx-auto">--}}
 {{--                <a href="{{ route('admin.invoices.index') }}" class="nav-link mx-auto {{ Request::is('admin/invoices') ? 'active' : '' }}">--}}
-                    <i class="nav-icon fas fa-calendar-week"></i>
-                    <p>Quản lý lịch làm</p>
-                </a>
-            </li>
+{{--                    <i class="nav-icon fas fa-calendar-week"></i>--}}
+{{--                    <p>Quản lý lịch làm</p>--}}
+{{--                </a>--}}
+{{--            </li>--}}
             <li class="nav-item mb-2">
                 <a href="{{ route('admin.contacts.index') }}" class="nav-link mx-auto {{ Request::is('admin/contacts') ? 'active' : '' }}">
                     <i class="nav-icon fas fa-envelope"></i>
