@@ -213,3 +213,7 @@ div.dataTables_wrapper {
 textarea {
     resize: none;
 }
+
+#btn-search {
+    width: max-content;
+}

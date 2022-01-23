@@ -29,9 +29,17 @@ class ProductController extends Controller
         return view('admin.product.index')->with('categories', $categories);
     }
 
-    public function show(DataTables $dataTables)
+    public function show(Request $request)
     {
-        return $dataTables->eloquent($this->productService->getProductList())->toJson();
+        return collect(DataTables::eloquent($this->productService->getProductList())
+            ->filter(function ($query) use ($request) {
+                if ($request->get('title') && !is_null($request->get('title'))) {
+                    $query->where('title', 'like', '%'.$request->get('title').'%');
+                }
+                if ($request->get('category_id') && !is_null($request->get('category_id'))) {
+                    $query->where('category_id', $request->get('category_id'));
+                }
+            }))->toJson();
     }
 
     public function create(CreateProductRequest $request)
