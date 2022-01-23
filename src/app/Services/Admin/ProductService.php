@@ -37,6 +37,7 @@ class ProductService extends BaseService
             'link_image' => str_replace('public', '', $pathProfileImage),
             'description' => $data->description,
             'price' => preg_replace('/\D/', '', $data->price),
+            'reduced_price' => preg_replace('/\D/', '', $data->reduced_price),
             'category_id' => $data->category
         ]);
 
@@ -53,4 +54,31 @@ class ProductService extends BaseService
         $status = $data['status'] ? Product::STATUS_BLOCKED : Product::STATUS_ACTIVE;
         return $this->productRepository->update(['status' => $status], $data->id);
     }
+
+//    public function update($data)
+//    {
+//        if($data->file('image')) {
+//
+//        } else {
+//            $product = $this->productRepository->create([
+//            'title' => $data->title,
+//            'link_image' => str_replace('public', '', $pathProfileImage),
+//            'description' => $data->description,
+//            'price' => preg_replace('/\D/', '', $data->price),
+//            'reduced_price' => preg_replace('/\D/', '', $data->reduced_price),
+//            'category_id' => $data->category
+//        ]);
+//        }
+//        $pathProfileImage = $this->fileService->updateFile($data->file('image'), self::PATH_PHOTO_PRODUCTS);
+//        $product = $this->productRepository->create([
+//            'title' => $data->title,
+//            'link_image' => str_replace('public', '', $pathProfileImage),
+//            'description' => $data->description,
+//            'price' => preg_replace('/\D/', '', $data->price),
+//            'reduced_price' => preg_replace('/\D/', '', $data->reduced_price),
+//            'category_id' => $data->category
+//        ]);
+//
+//        return $product;
+//    }
 }

@@ -10,6 +10,7 @@ class Staff extends Model
 {
     const STATUS_ACTIVE = 1;
     const STATUS_BLOCKED = 0;
+    const POSITION_CASHIER = 4;
 
     use HasFactory;
 

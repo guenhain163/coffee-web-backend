@@ -19,6 +19,26 @@
                     </button>
                 </div>
             </div>
+            <form class="form-search bg-light" autocomplete="off">
+                <div class="d-flex flex-column flex-xl-row p-4 border-dark bg-gradient-light img-rounded">
+                    <input type="text" class="form-control flex-grow-lg-1 mb-3 mb-xl-0 input-search mr-3"
+                           id="product_title"
+                           placeholder="Nhập tên sản phẩm"/>
+                    <select class="form-control flex-grow-lg-1 mb-3 mb-xl-0 input-search mr-3" name="category_id">
+                        <option value="" selected>Category</option>
+                        @foreach($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach
+                    </select>
+                    <div class="input-search d-flex flex-row">
+                        <button type="button" class="btn btn-brown d-flex align-items-center" id="btn-search"><i
+                                class="fas fa-search"></i><span
+                                class="ml-2">Tìm kiếm</span></button>
+                        <button type="reset" class="btn btn-default ml-2" id="btn-clear"><i
+                                class="fas fa-sync-alt"></i></button>
+                    </div>
+                </div>
+            </form>
             <div class="table-responsive box-table">
                 <table class="table table-list display nowrap" id="table-products">
                     <thead>
@@ -135,7 +155,11 @@
                         </div>
                         <div class="form-group">
                             <label for="input-price">Giá sản phẩm:</label>
-                            <input type="text" name="price" class="form-control" id="input-price" placeholder="Nhập giá sản phẩm">
+                            <input type="text" name="price" class="form-control money" id="input-price" placeholder="Nhập giá sản phẩm">
+                        </div>
+                        <div class="form-group">
+                            <label for="input-price">Giá sản phẩm giảm:</label>
+                            <input type="text" name="reduced_price" class="form-control money" id="input-price-reduced" placeholder="Nhập giá sản phẩm giảm">
                         </div>
                         <div class="form-group">
                             <label for="input-description">Mô tả:</label>
@@ -225,6 +249,10 @@
                             <input type="text" name="price" class="form-control" id="input-price" placeholder="Nhập giá sản phẩm">
                         </div>
                         <div class="form-group">
+                            <label for="input-price">Giá sản phẩm giảm:</label>
+                            <input type="text" name="reduced_price" class="form-control money" id="input-price-reduced" placeholder="Nhập giá sản phẩm giảm">
+                        </div>
+                        <div class="form-group">
                             <label for="input-description">Mô tả:</label>
                             <textarea name="description" class="form-control no-resize" id="input-description" rows="3"></textarea>
                         </div>
@@ -259,8 +287,13 @@
                     targets: [2]
                 }
             ],
+            serverSide: true,
             ajax: {
                 url: "{!! route('admin.products.show') !!}",
+                data: function (d) {
+                    d.title = $('#product_title').val() ?? '';
+                    d.category_id = $('.input-search[name="category_id"]').val() ?? '';
+                }
             },
             columns: [
                 {
@@ -317,7 +350,7 @@
         });
 
         $(document).ready(function (e) {
-            $("#input-price").inputmask("decimal", {
+            $(".money").inputmask("decimal", {
                 radixPoint: ".",
                 groupSeparator: ",",
                 digits: 2,
@@ -488,6 +521,7 @@
                 $('#form-edit').find('#input-category option[value="' + data.category + '"]').prop('selected', true);
                 $('#form-edit').find('#image_preview_container').attr('src', '/storage' + data.link_image);
                 $('#form-edit').find('#input-price').val(data.price);
+                $('#form-edit').find('#input-price-reduced').val(data.reduced_price);
                 $('#form-edit').find('#input-description').val(data.description);
                 $('#modal-edit').modal('show');
             });
@@ -533,7 +567,7 @@
                 $('#modal-detail').find('.category').text(data.category.name);
                 $('#modal-detail').find('.img-thumbnail').attr('src', '/storage' + data.link_image);
                 $('#modal-detail').find('.price').text($.number(data.price, 0, '.', ','));
-                $('#modal-detail').find('.description').text(data.description);
+                $('#modal-detail').find('.description').html(data.description);
                 $('#modal-detail').modal('show');
             });
 
@@ -543,6 +577,11 @@
                 {{--$('.custom-file-label').text('Chọn ảnh');--}}
                 {{--$('#image_preview_container').attr('src', '{{ asset('storage/image/products/image-preview.png') }}');--}}
                 // validator.resetForm();
+            });
+
+            $('#btn-search').click(function (e) {
+                e.preventDefault();
+                table.draw();
             });
         });
     </script>

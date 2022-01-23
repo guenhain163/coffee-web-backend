@@ -33,6 +33,8 @@ Route::namespace('Admin')->group(function () {
             Route::get('/show', 'OrderController@show')->name('admin.orders.show');
             Route::get('/update', 'OrderController@update')->name('admin.orders.update');
             Route::get('/detail', 'OrderController@orderDetail')->name('admin.orders.orderDetail');
+            Route::get('/getProductList', 'OrderController@getProductList')->name('admin.orders.getProductList');
+            Route::post('/create', 'OrderController@create')->name('admin.orders.create');
         });
 
         Route::prefix('accounts')->group(function () {

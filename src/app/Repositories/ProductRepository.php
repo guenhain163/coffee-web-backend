@@ -31,4 +31,16 @@ class ProductRepository extends BaseRepository
     {
         return $this->model->orderBy('id', 'ASC')->whereFavorite(Product::FAVORITE)->get();
     }
+
+    public function getProduct()
+    {
+        return $this->model->whereStatus(Product::STATUS_ACTIVE)->select([
+            'id',
+            'product_code',
+            'title',
+            'link_image',
+            'price',
+            'reduced_price'
+        ])->get();
+    }
 }
