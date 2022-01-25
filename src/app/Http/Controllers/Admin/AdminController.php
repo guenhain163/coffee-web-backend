@@ -27,7 +27,7 @@ class AdminController extends Controller
         return $dataTables->eloquent($this->adminService->getAdminList())->toJson();
     }
 
-    public function create(CreateAccountRequest $request)
+    public function create(Request $request)
     {
         return $this->adminService->create($request->all());
     }

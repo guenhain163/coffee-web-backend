@@ -50,7 +50,10 @@ class ProductService extends BaseService
 
     public function delete($data)
     {
-        return $this->productRepository->delete($data->id);
+        $product = $this->productRepository->find($data->id);
+        $url = $this->fileService->delete(str_replace("/image","image", $product->link_image));
+        $this->productRepository->delete($data->id);
+        return $url;
     }
 
     public function updateStatus($data)
@@ -59,30 +62,26 @@ class ProductService extends BaseService
         return $this->productRepository->update(['status' => $status], $data->id);
     }
 
-//    public function update($data)
-//    {
-//        if($data->file('image')) {
-//
-//        } else {
-//            $product = $this->productRepository->create([
-//            'title' => $data->title,
-//            'link_image' => str_replace('public', '', $pathProfileImage),
-//            'description' => $data->description,
-//            'price' => preg_replace('/\D/', '', $data->price),
-//            'reduced_price' => preg_replace('/\D/', '', $data->reduced_price),
-//            'category_id' => $data->category
-//        ]);
-//        }
-//        $pathProfileImage = $this->fileService->updateFile($data->file('image'), self::PATH_PHOTO_PRODUCTS);
-//        $product = $this->productRepository->create([
-//            'title' => $data->title,
-//            'link_image' => str_replace('public', '', $pathProfileImage),
-//            'description' => $data->description,
-//            'price' => preg_replace('/\D/', '', $data->price),
-//            'reduced_price' => preg_replace('/\D/', '', $data->reduced_price),
-//            'category_id' => $data->category
-//        ]);
-//
-//        return $product;
-//    }
+    public function edit($data)
+    {
+        $product = $this->productRepository->update([
+            'title' => $data->title,
+            'description' => $data->description,
+            'price' => preg_replace('/\D/', '', $data->price),
+            'reduced_price' => preg_replace('/\D/', '', $data->reduced_price),
+        ], $data->id);
+
+        if($data->file('image')) {
+            $pathImage = $this->fileService->updateFile($data->file('image'), self::PATH_PHOTO_PRODUCTS);
+            $this->fileService->delete(str_replace("/image","image", $product->link_image));
+
+            $this->productRepository->update([
+                "link_image" => $pathImage
+            ], $product->id);
+
+            $product['link_image'] = $pathImage;
+        }
+
+        return $product;
+    }
 }

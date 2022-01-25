@@ -56,4 +56,9 @@ class ProductController extends Controller
     {
         return $this->productService->updateStatus($request);
     }
+
+    public function edit(Request $request)
+    {
+        return $this->productService->edit($request);
+    }
 }

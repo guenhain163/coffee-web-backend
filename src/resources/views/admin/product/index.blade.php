@@ -147,7 +147,7 @@
                                 </div>
                                 <div class="col-12 col-lg-6">
                                     <div class="text-center">
-                                        <img id="image_preview_container" src="{{ asset('storage/image/products/image-preview.png') }}"
+                                        <img class="image_preview_container" src="{{ asset('storage/image/products/image-preview.png') }}"
                                              alt="preview image" style="max-height: 300px;">
                                     </div>
                                 </div>
@@ -200,6 +200,7 @@
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <form action="{{ route('admin.products.edit') }}" method="POST" id="form-edit" enctype="multipart/form-data" autocomplete="off">
+                    <input type="hidden" id="input-id" name="id"/>
                     <div class="modal-header">
                         <h5 class="modal-title font-weight-bold">Xem sản phẩm</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -238,7 +239,7 @@
                                 </div>
                                 <div class="col-12 col-lg-6">
                                     <div class="text-center">
-                                        <img id="image_preview_container" src="{{ asset('storage/image/products/image-preview.png') }}"
+                                        <img class="image_preview_container" src="{{ asset('storage/image/products/image-preview.png') }}"
                                              alt="preview image" style="max-height: 300px;">
                                     </div>
                                 </div>
@@ -353,7 +354,7 @@
             $(".money").inputmask("decimal", {
                 radixPoint: ".",
                 groupSeparator: ",",
-                digits: 2,
+                digits: 0,
                 rightAlign: false,
                 autoGroup: true,
                 prefix: '',
@@ -366,12 +367,14 @@
                 }
             });
 
-            $('#input-file').change(function(){
+            $('.custom-file-input').change(function(){
                 let reader = new FileReader();
                 reader.onload = (e) => {
-                    $('#image_preview_container').attr('src', e.target.result);
+                    console.log(e.target.result);
+                    $(this).closest('.form-group').find('.image_preview_container').attr('src', e.target.result);
                 }
-                $('.custom-file-label').text(this.files[0].name);
+                console.log(this.files[0].name);
+                $(this).closest('.form-group').find('.custom-file-label').text(this.files[0].name);
                 reader.readAsDataURL(this.files[0]);
 
             });
@@ -448,7 +451,7 @@
                 $('.form-control').val('');
                 $('#input-category option:first-child').prop('selected', true);
                 $('.custom-file-label').text('Chọn ảnh');
-                $('#image_preview_container').attr('src', '{{ asset('storage/image/products/image-preview.png') }}');
+                $('#modal-add .image_preview_container').attr('src', '{{ asset('storage/image/products/image-preview.png') }}');
                 validator.resetForm();
             });
 
@@ -517,11 +520,12 @@
 
             $('#table-products').on('click', '.btn-edit', function () {
                 var data = table.row($(this).parents("tr")).data();
+                $('#form-edit').find('#input-id').val(data.id);
                 $('#form-edit').find('#input-title').val(data.title);
                 $('#form-edit').find('#input-category option[value="' + data.category + '"]').prop('selected', true);
-                $('#form-edit').find('#image_preview_container').attr('src', '/storage' + data.link_image);
+                $('#form-edit').find('.image_preview_container').attr('src', '/storage' + data.link_image);
                 $('#form-edit').find('#input-price').val(data.price);
-                $('#form-edit').find('#input-price-reduced').val(data.reduced_price);
+                $('#form-edit').find('#input-price-reduced').val(data.reduced_price ?? data.price);
                 $('#form-edit').find('#input-description').val(data.description);
                 $('#modal-edit').modal('show');
             });
@@ -530,7 +534,7 @@
                 $('.form-control').val('');
                 $('#input-category option:first-child').prop('selected', true);
                 $('.custom-file-label').text('Chọn ảnh');
-                $('#image_preview_container').attr('src', '{{ asset('storage/image/products/image-preview.png') }}');
+                $('#modal-edit .image_preview_container').attr('src', '{{ asset('storage/image/products/image-preview.png') }}');
                 // validator.resetForm();
             });
 
@@ -582,6 +586,45 @@
             $('#btn-search').click(function (e) {
                 e.preventDefault();
                 table.draw();
+            });
+
+            $('#form-edit').submit(function (e) {
+                e.preventDefault();
+
+                if($('#form-edit #input-title').val() == null || $('#form-edit #input-category').val() == null ||
+                    $('#form-edit #input-price').val() == null || $('#form-edit #input-price-reduced').val() == null ||
+                    $('#input-description').val() == null) {
+                    alert("Phải nhập đủ thông tin");
+                } else {
+                    var formData = new FormData(this);
+
+                    $.ajax({
+                        type:'POST',
+                        url: '{{ route('admin.products.edit') }}',
+                        dataType: 'JSON',
+                        data: formData,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        beforeSend: function () {
+                            $("#form-edit button[type='submit']").attr("disabled", "")
+                                .html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Lưu');
+                        },
+                        success: (data) => {
+                            if(data) {
+                                $('#modal-edit').modal('hide');
+                                success('Bạn đã thêm sản phẩm thành công.');
+                            }
+                        },
+                        error: function(){
+                            fail('Thêm sản phẩm thất bại, hãy kiểm tra lại.');
+                        },
+                        complete: function () {
+                            $("#form-edit button[type='submit']").removeAttr("disabled").html("Lưu");
+                        }
+                    });
+                }
+
             });
         });
     </script>

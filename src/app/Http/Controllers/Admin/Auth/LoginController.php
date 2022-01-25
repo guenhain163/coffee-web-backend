@@ -75,7 +75,7 @@ class LoginController extends Controller
         return redirect()->back()
             ->withInput($request->only($this->username(), 'remember'))
             ->withErrors([
-                'password' => 'メールアドレスまたはパスワードが正しくありません。'
+                'password' => 'Email hoặc mật khẩu không đúng.'
             ]);
     }
 
@@ -109,7 +109,7 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
         if (session()->has('url.intended')) {
-            return redirect(session('url.intended'))->with('success', '正常にログインしました。');
+            return redirect(session('url.intended'))->with('success', 'Đăng nhập thành công.');
         }
 
         return redirect()->route('admin.index');
