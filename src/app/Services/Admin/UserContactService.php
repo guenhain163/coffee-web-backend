@@ -23,7 +23,7 @@ class UserContactService extends BaseService
 
     public function delete($id)
     {
-        return $this->userContactRepository->update(['deleted_at' => Carbon::now()], $id);
+        return $this->userContactRepository->find($id)->delete();
     }
 
     public function update($data)
