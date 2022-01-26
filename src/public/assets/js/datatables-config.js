@@ -23,22 +23,22 @@ $.extend($.fn.dataTable.defaults, {
     processing: true,
     language: {
         sSearch: '<i class="fa fa-search"></i> 検索',
-        emptyTable: "データがございません",
-        info: "_TOTAL_ 件中 _START_ から _END_ まで表示",
+        emptyTable: "Không có dữ liệu",
+        info: "Từ _START_ đến _END_ trong _TOTAL_",
         infoEmpty: "0 件中 0 から 0 まで表示",
         infoPostFix: "",
         infoThousands: ",",
-        loadingRecords: `読み込み中...`,
+        loadingRecords: `Loading...`,
         infoFiltered: "",
         processing: `
                 <div class="spinner-border" role="status">
                   <span class="sr-only">読み込み中...</span>
                 </div>
               `,
-        zeroRecords: "データがございません",
+        zeroRecords: "Không có dữ liệu",
         paginate: {
-            first: "先頭",
-            last: "最終",
+            first: "Đầu",
+            last: "Cuối",
             next: "<i class=\"fas fa-chevron-right\"></i>",
             previous: "<i class=\"fas fa-chevron-left\"></i>"
         },
