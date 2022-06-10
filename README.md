@@ -24,7 +24,7 @@ $cp .env.example .env
 ```
 DB_CONNECTION=mysql
 DB_HOST=coffee-db
-DB_PORT=3010
+DB_PORT=3306
 DB_DATABASE=coffee_database
 DB_USERNAME=homestead
 DB_PASSWORD=secret
